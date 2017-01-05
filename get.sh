@@ -94,18 +94,33 @@
 
 
 # Analytics - on filtered results
+# curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty' -d'
+# {
+#   "query": {
+#     "match": {
+#       "last_name": "smith"
+#     }
+#   },
+#   "aggs": {
+#     "all_interests": {
+#       "terms": {
+#         "field": "interests"
+#       }
+#     }
+#   }
+# }'
+
+# Anlytics - average
 curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty' -d'
 {
-  "query": {
-    "match": {
-      "last_name": "smith"
+    "aggs" : {
+        "all_interests" : {
+            "terms" : { "field" : "interests" },
+            "aggs" : {
+                "avg_age" : {
+                    "avg" : { "field" : "age" }
+                }
+            }
+        }
     }
-  },
-  "aggs": {
-    "all_interests": {
-      "terms": {
-        "field": "interests"
-      }
-    }
-  }
 }'
