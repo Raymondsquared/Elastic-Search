@@ -16,4 +16,14 @@
 # curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty'
 
 # lightweight search method that is easy to use. This method is often referred to as a query-string search.
-curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?q=last_name:Smith&pretty'
+# curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?q=last_name:Smith&pretty'
+
+# a rich, flexible, query language called the query DSL, which allows us to build much more complicated, robust queries.
+curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty' -d'
+{
+    "query" : {
+        "match" : {
+            "last_name" : "Smith"
+        }
+    }
+}'
