@@ -68,16 +68,26 @@
 # }'
 
 # highlight snippets of text from search results
+# curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty' -d'
+# {
+#     "query" : {
+#         "match_phrase" : {
+#             "about" : "rock climbing"
+#         }
+#     },
+#     "highlight": {
+#         "fields" : {
+#             "about" : {}
+#         }
+#     }
+# }'
+
+# Analytics - aggregations
 curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty' -d'
 {
-    "query" : {
-        "match_phrase" : {
-            "about" : "rock climbing"
-        }
-    },
-    "highlight": {
-        "fields" : {
-            "about" : {}
-        }
+  "aggs": {
+    "all_interests": {
+      "terms": { "field": "interests" }
     }
+  }
 }'
