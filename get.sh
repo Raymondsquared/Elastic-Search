@@ -13,4 +13,7 @@
 # curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/1?pretty'
 
 # Simple search, By default, a search will return the top 10 results.
-curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty'
+# curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty'
+
+# lightweight search method that is easy to use. This method is often referred to as a query-string search.
+curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?q=last_name:Smith&pretty'
