@@ -29,20 +29,30 @@
 # }'
 
 # filter, which allows us to execute structured searches efficiently
+# curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty' -d'
+# {
+#     "query" : {
+#         "bool" : {
+#             "must" : {
+#                 "match" : {
+#                     "last_name" : "smith"
+#                 }
+#             },
+#             "filter" : {
+#                 "range" : {
+#                     "age" : { "gt" : 30 }
+#                 }
+#             }
+#         }
+#     }
+# }'
+
+# full text search
 curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty' -d'
 {
     "query" : {
-        "bool" : {
-            "must" : {
-                "match" : {
-                    "last_name" : "smith"
-                }
-            },
-            "filter" : {
-                "range" : {
-                    "age" : { "gt" : 30 }
-                }
-            }
+        "match" : {
+            "about" : "rock climbing"
         }
     }
 }'
