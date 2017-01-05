@@ -19,11 +19,30 @@
 # curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?q=last_name:Smith&pretty'
 
 # a rich, flexible, query language called the query DSL, which allows us to build much more complicated, robust queries.
+# curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty' -d'
+# {
+#     "query" : {
+#         "match" : {
+#             "last_name" : "Smith"
+#         }
+#     }
+# }'
+
+# filter, which allows us to execute structured searches efficiently
 curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty' -d'
 {
     "query" : {
-        "match" : {
-            "last_name" : "Smith"
+        "bool" : {
+            "must" : {
+                "match" : {
+                    "last_name" : "smith"
+                }
+            },
+            "filter" : {
+                "range" : {
+                    "age" : { "gt" : 30 }
+                }
+            }
         }
     }
 }'
