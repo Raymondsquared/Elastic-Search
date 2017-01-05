@@ -48,10 +48,20 @@
 # }'
 
 # full text search
+# curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty' -d'
+# {
+#     "query" : {
+#         "match" : {
+#             "about" : "rock climbing"
+#         }
+#     }
+# }'
+
+# match exact sequences of words or phrases
 curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty' -d'
 {
     "query" : {
-        "match" : {
+        "match_phrase" : {
             "about" : "rock climbing"
         }
     }
