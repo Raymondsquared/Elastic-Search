@@ -83,11 +83,29 @@
 # }'
 
 # Analytics - aggregations
+# curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty' -d'
+# {
+#   "aggs": {
+#     "all_interests": {
+#       "terms": { "field": "interests" }
+#     }
+#   }
+# }'
+
+
+# Analytics - on filtered results
 curl -XGET $RR_AWS_ELASTIC_SEARCH_URL'/megacorp/employee/_search?pretty' -d'
 {
+  "query": {
+    "match": {
+      "last_name": "smith"
+    }
+  },
   "aggs": {
     "all_interests": {
-      "terms": { "field": "interests" }
+      "terms": {
+        "field": "interests"
+      }
     }
   }
 }'
